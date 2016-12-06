@@ -41,7 +41,6 @@ with open("V1432_AQL_TC_V2.txt") as f:
 
     # magnitudes - numpy array of all magnitude measurements 
     magnitudes = array([float(i) for i in data["MAG"]])
-    print max(filtered_data['MAG'])
 
     # xvals - numpy array 1-792 for the x values of the measurements
     xvals = array(list(range(1,len(magnitudes)+1)))

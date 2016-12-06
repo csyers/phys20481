@@ -23,8 +23,8 @@ def t_min(mag, time):
     return time[mindex]
 
 with open("V1432_AQL_TC_V2.txt") as f:
-    reader = csv.reader(f)
-    headers = reader.next()
+    reader = csv.reader(f, delimiter=",")
+    headers = next(reader, None)
     data = {}
     filtered_data = {}
     filtered_unseen = {}
@@ -112,7 +112,7 @@ with open("V1432_AQL_TC_V2.txt") as f:
     p1 = np.poly1d(z1)
 
     fig2, ax2 = plt.subplots()
-    fig2.suptitle("Filtered Data",fontsize=14, fontweight='bold')
+    fig2.suptitle("V1432 AQL 10/11/2016",fontsize=20, fontweight='bold')
     ax2.scatter(fut,fmagnitudes, s=10, label="Strongly Detected")
     ax2.scatter(unseen_fut, unseen_fmagnitudes, s=10, c='r', marker="o", label="Weakly Detected")
     ax2.invert_yaxis()
