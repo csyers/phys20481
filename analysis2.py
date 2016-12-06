@@ -1,10 +1,11 @@
 import csv
 import math
-# from numpy import array
+from numpy import array
 import numpy as np
 import time
 
 min_mag = -2.5*math.log(1.0 - 1/3.0, 10)
+
 
 
 with open("V1432_AQL_TC_V2.txt") as f:
@@ -15,14 +16,18 @@ with open("V1432_AQL_TC_V2.txt") as f:
     filtered_unseen = {}
     for h in headers:
         data[h] = []
+        filtered_data[h] = []
+        filtered_unseen[h] = []
     for row in reader:
         for h, v in zip(headers,row):
             data[h].append(v)
-            if v[3] >= min_mag:
+            if float(row[3]) <= min_mag:
                 filtered_data[h].append(v)
             else:
                 filtered_unseen[h].append(v)
 
+    # print len(filtered_data['MAGERR'])
+    # print len(filtered_unseen['MAGERR'])
 
     # magnitudes - numpy array of all magnitude measurements 
     magnitudes = array([float(i) for i in data["MAG"]])
