@@ -5,8 +5,18 @@ import numpy as np
 import time
 
 min_mag = -2.5*math.log(1.0 - 1/3.0, 10)
+#.418055
+def timeify(t):
+    m = t*60
+    s = (m % 1) * 60
+    m = int(m)
+    return str(int(t)) + ":" + str(m) + ":" + str(s) + " UTC"
 
 
+print "height of eclipse happened at 00:" + timeify(.418055) 
+
+e_start = 50
+e_end = 130
 
 with open("V1432_AQL_TC_V2.txt") as f:
     reader = csv.reader(f)
@@ -31,6 +41,7 @@ with open("V1432_AQL_TC_V2.txt") as f:
 
     # magnitudes - numpy array of all magnitude measurements 
     magnitudes = array([float(i) for i in data["MAG"]])
+    print max(filtered_data['MAG'])
 
     # xvals - numpy array 1-792 for the x values of the measurements
     xvals = array(list(range(1,len(magnitudes)+1)))
@@ -62,12 +73,9 @@ with open("V1432_AQL_TC_V2.txt") as f:
     # yerrs - numpy array of the measured magnitude errors
     yerrs = array([float(i) for i in data["MAGERR"]])
 
-    # fit a polynomial with degree 11
-    z = np.polyfit(xvals, magnitudes, 11)
+    # temp = np.delete(fut, fmagnitudes.argmax())
+    # temp2 = np.delete(fmagnitudes, fmagnitudes.argmax())
 
-    # get the scalar function of thepolynomial
-    p = np.poly1d(z)
-    #model = LomScargleFast().fit(t, magnitudes, yerrs)
-    #periods, power = model.periodogram_auto(myquist_factor=100)
+    # print "inflection of eclipse occurs at " + timeify((temp[temp2.argmax()]+fut[fmagnitudes.argmax()])/2)
 
 
