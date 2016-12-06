@@ -1,12 +1,11 @@
 import csv
 import math
-import matplotlib.pyplot as plt
-from numpy import array
+# from numpy import array
 import numpy as np
 import time
 
-min_mag = -2.5*math.log(1 - 1/3)
-print min_mag
+min_mag = -2.5*math.log(1.0 - 1/3.0, 10)
+
 
 with open("V1432_AQL_TC_V2.txt") as f:
     reader = csv.reader(f)
@@ -66,24 +65,4 @@ with open("V1432_AQL_TC_V2.txt") as f:
     #model = LomScargleFast().fit(t, magnitudes, yerrs)
     #periods, power = model.periodogram_auto(myquist_factor=100)
 
-    #fig, ax = plt.subplots()
-    #ax.plot(periods,power)
-    #ax.set(xlim=(02,1.4),ylim=(0,0.8),xlabel = 'period(days)',ylabel='Lomb-Scargle Power');
-
-    # plot everythin
-    fig, ax = plt.subplots()
-    #plt.errorbar(xvals, magnitudes, yerr= yerrs)
-    ax.scatter(ut,magnitudes)
-    ax.invert_yaxis()
-    plt.xlabel("Time (UT)")
-    plt.ylabel("Magnitude")
-    #plt.plot( xvals, p(xvals), '-')
-    start, end = ax.get_xlim()
-    #plt.xticks(ut,time_strings, rotation='vertical')
-    ax.xaxis.set_ticks(np.arange(start,end,.2))
-    plt.subplots_adjust(bottom=0.20)
-    #ax.xaxis.set_major_formatter(matplotlib.ticker.FormatStrFormatter())
-    #plot.set_xlabel("Time (UT)")
-    #:wqplot.set_ylabel("Magnitude")
-    plt.show()
 
